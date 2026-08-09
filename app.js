@@ -21,6 +21,7 @@ const SHIFT_BY_ID = Object.freeze({ day: SHIFTS[0], night: SHIFTS[1], mid: SHIFT
 const OVERRIDE_STORAGE_KEY = 'shiftflow-shift-overrides';
 
 const dateInput = document.querySelector('#anchor-date');
+const dateDisplay = document.querySelector('#anchor-date-display');
 const shiftInput = document.querySelector('#anchor-shift');
 const yearsInput = document.querySelector('#years');
 const grid = document.querySelector('#calendar-grid');
@@ -37,6 +38,11 @@ let displayMonth = new Date(2026, 7, 1);
 function parseDate(value) {
   const [year, month, day] = value.split('-').map(Number);
   return new Date(year, month - 1, day);
+}
+
+function updateAnchorDateDisplay() {
+  const date = parseDate(dateInput.value);
+  dateDisplay.textContent = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
 }
 
 function toDateKey(date) {
@@ -302,6 +308,7 @@ document.querySelector('#generate').addEventListener('click', () => {
   displayMonth = new Date(parseDate(dateInput.value).getFullYear(), parseDate(dateInput.value).getMonth(), 1);
   renderCalendar();
 });
+dateInput.addEventListener('change', updateAnchorDateDisplay);
 document.querySelector('#previous-month').addEventListener('click', () => { displayMonth.setMonth(displayMonth.getMonth() - 1); renderCalendar(); });
 document.querySelector('#next-month').addEventListener('click', () => { displayMonth.setMonth(displayMonth.getMonth() + 1); renderCalendar(); });
 yearsInput.addEventListener('change', updateExportSummary);
@@ -334,6 +341,7 @@ document.querySelector('#close-editor').addEventListener('click', () => {
 renderCycle();
 renderCalendar();
 initializeColors();
+updateAnchorDateDisplay();
 
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
