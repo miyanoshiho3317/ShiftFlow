@@ -63,11 +63,54 @@
           </label>
           <button id="generate" class="primary-button" type="button">更新日历</button>
         </div>
+        <div class="color-customizer" aria-labelledby="color-title">
+          <div class="color-heading">
+            <div>
+              <p class="eyebrow">配色</p>
+              <h3 id="color-title">班次颜色</h3>
+            </div>
+            <button id="reset-colors" class="text-button" type="button">恢复默认配色</button>
+          </div>
+          <p class="color-hint">点击圆环打开色盘，也可直接填写 6 位色号。设置仅保存在当前设备。</p>
+          <div class="color-controls">
+            <label class="color-control">
+              <span class="color-ring" style="--swatch: var(--day)"><input data-shift-color="day" type="color" value="#e4a836" aria-label="选择白班颜色" /></span>
+              <span class="color-name">白班</span>
+              <input class="hex-input" data-hex-input="day" type="text" value="#E4A836" maxlength="7" autocapitalize="characters" spellcheck="false" aria-label="白班颜色色号" />
+            </label>
+            <label class="color-control">
+              <span class="color-ring" style="--swatch: var(--night)"><input data-shift-color="night" type="color" value="#3d629b" aria-label="选择夜班颜色" /></span>
+              <span class="color-name">夜班</span>
+              <input class="hex-input" data-hex-input="night" type="text" value="#3D629B" maxlength="7" autocapitalize="characters" spellcheck="false" aria-label="夜班颜色色号" />
+            </label>
+            <label class="color-control">
+              <span class="color-ring" style="--swatch: var(--mid)"><input data-shift-color="mid" type="color" value="#d16b4e" aria-label="选择中班颜色" /></span>
+              <span class="color-name">中班</span>
+              <input class="hex-input" data-hex-input="mid" type="text" value="#D16B4E" maxlength="7" autocapitalize="characters" spellcheck="false" aria-label="中班颜色色号" />
+            </label>
+            <label class="color-control">
+              <span class="color-ring" style="--swatch: var(--rest)"><input data-shift-color="rest" type="color" value="#a2abb2" aria-label="选择休息日颜色" /></span>
+              <span class="color-name">休息</span>
+              <input class="hex-input" data-hex-input="rest" type="text" value="#A2ABB2" maxlength="7" autocapitalize="characters" spellcheck="false" aria-label="休息日颜色色号" />
+            </label>
+          </div>
+        </div>
       </section>
 
       <section class="cycle-strip" aria-label="当前排班循环">
         <div class="cycle-title"><span>当前规律</span><strong>白班 → 夜班 → 休息 → 中班 → 休息 → 休息</strong></div>
         <ol id="cycle-steps" class="cycle-steps"></ol>
+        <div class="shift-stats" aria-live="polite">
+          <div class="stats-block">
+            <span id="stats-period" class="stats-period">排班统计</span>
+            <div id="shift-stats-list" class="stats-list"></div>
+          </div>
+          <div class="stats-divider" aria-hidden="true"></div>
+          <div class="stats-block">
+            <span id="month-stats-period" class="stats-period">当月计次</span>
+            <div id="month-stats-list" class="stats-list"></div>
+          </div>
+        </div>
       </section>
 
       <section class="card calendar-card" aria-labelledby="calendar-title">
@@ -87,11 +130,34 @@
           <span><i class="dot night"></i>夜班 00:00–08:00</span>
           <span><i class="dot mid"></i>中班 16:00–24:00</span>
           <span><i class="dot rest"></i>休息</span>
+          <span><i class="holiday-dot"></i>法定节假日提醒</span>
         </div>
         <div class="weekday-row" aria-hidden="true">
           <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
         </div>
         <div id="calendar-grid" class="calendar-grid"></div>
+        <section id="shift-editor" class="shift-editor" hidden aria-labelledby="editor-title">
+          <div class="editor-heading">
+            <div>
+              <p class="eyebrow">单日调班</p>
+              <h3 id="editor-title"><span id="editor-date">—</span> 的班次</h3>
+            </div>
+            <button id="close-editor" class="close-editor" type="button" aria-label="关闭调班设置">×</button>
+          </div>
+          <div class="editor-controls">
+            <label>
+              调整为
+              <select id="editor-shift">
+                <option value="day">白班 · 08:00–16:00</option>
+                <option value="night">夜班 · 00:00–08:00</option>
+                <option value="mid">中班 · 16:00–24:00</option>
+                <option value="rest">休息</option>
+              </select>
+            </label>
+            <button id="reset-day-shift" class="secondary-button" type="button">恢复原始排班</button>
+          </div>
+          <p id="editor-note" class="editor-note">调整会立即保存到本设备，并用于导出的班表；不会改变后续循环。</p>
+        </section>
       </section>
 
       <section class="export-panel" aria-labelledby="export-title">
@@ -106,7 +172,7 @@
         </button>
       </section>
 
-      <p class="footnote">所有数据仅在此设备的浏览器中计算，不会上传。夜班按当天 00:00–08:00 记录。</p>
+      <p class="footnote">所有数据仅在此设备的浏览器中计算，不会上传。夜班按当天 00:00–08:00 记录。已收录 2026 年官方节假日安排，仅作提醒，不改变倒班规律。单日调班会保存到本设备。</p>
     </main>
     <script src="app.js"></script>
   </body>
