@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="电厂五班三运转排班日历生成与 ICS 导出工具" />
+    <meta name="theme-color" content="#f6f5f1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="倒班日历" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>ShiftFlow · 倒班日历</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">SHIFT PLANNER</p>
+          <h1>倒班日历</h1>
+          <p class="intro">按五班三运转规律，轻松生成班表并导入 Apple Calendar。</p>
+        </div>
+        <div class="cycle-badge" aria-label="六天循环">
+          <span>6</span>
+          <small>天循环</small>
+        </div>
+      </header>
+
+      <section class="card settings-card" aria-labelledby="settings-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">设置</p>
+            <h2 id="settings-title">确定排班锚点</h2>
+          </div>
+          <p class="hint">以任意一个已知班次为起点，系统会自动推算前后日期。</p>
+        </div>
+        <div class="form-grid">
+          <label>
+            已知日期
+            <input id="anchor-date" type="date" value="2026-08-11" />
+          </label>
+          <label>
+            当天班次
+            <select id="anchor-shift">
+              <option value="day">白班 · 08:00–16:00</option>
+              <option value="night">夜班 · 00:00–08:00</option>
+              <option value="rest1">休息（夜班后）</option>
+              <option value="mid" selected>中班 · 16:00–24:00</option>
+              <option value="rest2">休息（中班后第 1 天）</option>
+              <option value="rest3">休息（中班后第 2 天）</option>
+            </select>
+          </label>
+          <label>
+            生成年数
+            <select id="years">
+              <option value="1">1 年</option>
+              <option value="2">2 年</option>
+              <option value="3" selected>3 年</option>
+              <option value="5">5 年</option>
+              <option value="10">10 年</option>
+            </select>
+          </label>
+          <button id="generate" class="primary-button" type="button">更新日历</button>
+        </div>
+      </section>
+
+      <section class="cycle-strip" aria-label="当前排班循环">
+        <div class="cycle-title"><span>当前规律</span><strong>白班 → 夜班 → 休息 → 中班 → 休息 → 休息</strong></div>
+        <ol id="cycle-steps" class="cycle-steps"></ol>
+      </section>
+
+      <section class="card calendar-card" aria-labelledby="calendar-title">
+        <div class="calendar-toolbar">
+          <div>
+            <p class="eyebrow">预览</p>
+            <h2 id="calendar-title">班次日历</h2>
+          </div>
+          <div class="month-controls">
+            <button id="previous-month" class="icon-button" type="button" aria-label="上一个月">←</button>
+            <strong id="month-label" aria-live="polite"></strong>
+            <button id="next-month" class="icon-button" type="button" aria-label="下一个月">→</button>
+          </div>
+        </div>
+        <div class="legend" aria-label="班次图例">
+          <span><i class="dot day"></i>白班 08:00–16:00</span>
+          <span><i class="dot night"></i>夜班 00:00–08:00</span>
+          <span><i class="dot mid"></i>中班 16:00–24:00</span>
+          <span><i class="dot rest"></i>休息</span>
+        </div>
+        <div class="weekday-row" aria-hidden="true">
+          <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
+      </section>
+
+      <section class="export-panel" aria-labelledby="export-title">
+        <div>
+          <p class="eyebrow">导出</p>
+          <h2 id="export-title">带着班表出发</h2>
+          <p id="export-summary">将生成的班次保存为 Apple Calendar 可识别的 .ics 文件。</p>
+        </div>
+        <button id="export-ics" class="export-button" type="button">
+          <span class="download-icon">↓</span>
+          导出 .ics 日历
+        </button>
+      </section>
+
+      <p class="footnote">所有数据仅在此设备的浏览器中计算，不会上传。夜班按当天 00:00–08:00 记录。</p>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
