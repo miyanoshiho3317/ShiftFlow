@@ -1,0 +1,9 @@
+{
+  "name": "ShiftFlow 倒班日历",
+  "short_name": "倒班日历",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f5f1",
+  "theme_color": "#f6f5f1"
+}
