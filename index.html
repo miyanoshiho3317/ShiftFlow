@@ -11,6 +11,8 @@
     <meta name="format-detection" content="telephone=no" />
     <title>ShiftFlow · 倒班日历</title>
     <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icons/shiftflow-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/shiftflow-icon.svg" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -175,5 +177,14 @@
       <p class="footnote">所有数据仅在此设备的浏览器中计算，不会上传。夜班按当天 00:00–08:00 记录。已收录 2026 年官方节假日安排，仅作提醒，不改变倒班规律。单日调班会保存到本设备。</p>
     </main>
     <script src="app.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').catch((error) => {
+            console.warn('ShiftFlow service worker registration failed:', error);
+          });
+        });
+      }
+    </script>
   </body>
 </html>

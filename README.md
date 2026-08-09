@@ -4,6 +4,8 @@ ShiftFlow 是一个面向电厂五班三运转人员的排班日历工具。它�
 
 在线使用：<https://miyanoshiho3317.github.io/ShiftFlow/>
 
+> 想把 ShiftFlow 像应用一样安装到手机或电脑，并在首次访问后离线使用？请阅读 [PWA 使用说明](PWA-USER-GUIDE.md)。
+
 ## 功能概览
 
 - **自动排班**：按白班、夜班、休息、中班、休息、休息的 6 天循环生成未来 1–10 年班表。
@@ -38,7 +40,7 @@ ShiftFlow 是一个面向电厂五班三运转人员的排班日历工具。它�
 
 ### 在电脑上离线使用
 
-下载或复制整个项目文件夹，双击 `index.html`，即可在浏览器中打开。
+下载或复制整个项目文件夹后，双击 `index.html` 即可浏览和使用排班功能。若需要安装为应用或启用离线缓存，请部署到 HTTPS 网站，或通过本机 `localhost` 启动静态服务器；详见 [PWA 使用说明](PWA-USER-GUIDE.md)。
 
 请保持以下文件位于同一文件夹：
 
@@ -48,6 +50,8 @@ styles.css
 app.js
 manifest.webmanifest
 sw.js
+icons/shiftflow-icon.svg
+PWA-USER-GUIDE.md
 ```
 
 排班计算和 `.ics` 导出均在本机浏览器中完成，不会上传数据。
@@ -107,6 +111,8 @@ https://你的用户名.github.io/shiftflow/
 | `app.js` | 排班计算、月历渲染和 `.ics` 导出 |
 | `manifest.webmanifest` | 添加到主屏幕时使用的网页应用信息 |
 | `sw.js` | 已发布网站的离线缓存 |
+| `icons/shiftflow-icon.svg` | PWA 的应用图标 |
+| `PWA-USER-GUIDE.md` | PWA 安装、离线使用与故障排查说明 |
 
 ## 隐私
 
