@@ -40,7 +40,10 @@
         <div class="form-grid">
           <label>
             已知日期
-            <input id="anchor-date" type="date" value="2026-08-11" />
+            <span class="date-picker-shell">
+              <span id="anchor-date-display" class="date-picker-value" aria-hidden="true">2026年8月11日</span>
+              <input id="anchor-date" type="date" value="2026-08-11" aria-label="选择已知日期" />
+            </span>
           </label>
           <label>
             当天班次
