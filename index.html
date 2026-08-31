@@ -23,8 +23,8 @@
           <h1>倒班日历</h1>
           <p class="intro">按五班三运转规律，轻松生成班表并导入 Apple Calendar。</p>
         </div>
-        <div class="cycle-badge" aria-label="六天循环">
-          <span>6</span>
+        <div class="cycle-badge" aria-label="五天循环">
+          <span>5</span>
           <small>天循环</small>
         </div>
       </header>
@@ -41,8 +41,8 @@
           <label>
             已知日期
             <span class="date-picker-shell">
-              <span id="anchor-date-display" class="date-picker-value" aria-hidden="true">2026年8月11日</span>
-              <input id="anchor-date" type="date" value="2026-08-11" aria-label="选择已知日期" />
+              <span id="anchor-date-display" class="date-picker-value" aria-hidden="true">2026年8月31日</span>
+              <input id="anchor-date" type="date" value="2026-08-31" aria-label="选择已知日期" />
             </span>
           </label>
           <label>
@@ -50,10 +50,9 @@
             <select id="anchor-shift">
               <option value="day">白班 · 08:00–16:00</option>
               <option value="night">夜班 · 00:00–08:00</option>
-              <option value="rest1">休息（夜班后）</option>
               <option value="mid" selected>中班 · 16:00–24:00</option>
-              <option value="rest2">休息（中班后第 1 天）</option>
-              <option value="rest3">休息（中班后第 2 天）</option>
+              <option value="rest1">休息（中班后第 1 天）</option>
+              <option value="rest2">休息（中班后第 2 天）</option>
             </select>
           </label>
           <label>
@@ -103,7 +102,7 @@
       </section>
 
       <section class="cycle-strip" aria-label="当前排班循环">
-        <div class="cycle-title"><span>当前规律</span><strong>白班 → 夜班 → 休息 → 中班 → 休息 → 休息</strong></div>
+        <div class="cycle-title"><span>当前规律</span><strong>白班 → 夜班 → 中班 → 休息 → 休息</strong></div>
         <ol id="cycle-steps" class="cycle-steps"></ol>
         <div class="shift-stats" aria-live="polite">
           <div class="stats-block">

@@ -1,7 +1,6 @@
 const SHIFTS = [
   { id: 'day', name: '白班', time: '08:00–16:00', start: '080000', end: '160000', startHour: 8, duration: 8 },
   { id: 'night', name: '夜班', time: '00:00–08:00', start: '000000', end: '080000', startHour: 0, duration: 8 },
-  { id: 'rest', name: '休息' },
   { id: 'mid', name: '中班', time: '16:00–24:00', start: '160000', end: '235959', startHour: 16, duration: 8 },
   { id: 'rest', name: '休息' },
   { id: 'rest', name: '休息' },
@@ -17,7 +16,7 @@ const HOLIDAY_NOTICES = Object.freeze({
   '2026-09-20': { label: '国庆补班', workday: true }, '2026-09-25': { label: '中秋休' }, '2026-09-26': { label: '中秋休' }, '2026-09-27': { label: '中秋休' },
   '2026-10-01': { label: '国庆休' }, '2026-10-02': { label: '国庆休' }, '2026-10-03': { label: '国庆休' }, '2026-10-04': { label: '国庆休' }, '2026-10-05': { label: '国庆休' }, '2026-10-06': { label: '国庆休' }, '2026-10-07': { label: '国庆休' }, '2026-10-10': { label: '国庆补班', workday: true },
 });
-const SHIFT_BY_ID = Object.freeze({ day: SHIFTS[0], night: SHIFTS[1], mid: SHIFTS[3], rest: SHIFTS[2] });
+const SHIFT_BY_ID = Object.freeze({ day: SHIFTS[0], night: SHIFTS[1], mid: SHIFTS[2], rest: SHIFTS[3] });
 const OVERRIDE_STORAGE_KEY = 'shiftflow-shift-overrides';
 
 const dateInput = document.querySelector('#anchor-date');
@@ -61,7 +60,7 @@ function daysBetween(a, b) {
 
 function cycleIndexFor(date) {
   const anchor = parseDate(dateInput.value);
-  const anchorPositions = { day: 0, night: 1, rest1: 2, mid: 3, rest2: 4, rest3: 5 };
+  const anchorPositions = { day: 0, night: 1, mid: 2, rest1: 3, rest2: 4 };
   const anchorIndex = anchorPositions[shiftInput.value];
   const distance = daysBetween(anchor, date);
   return ((anchorIndex + distance) % SHIFTS.length + SHIFTS.length) % SHIFTS.length;
