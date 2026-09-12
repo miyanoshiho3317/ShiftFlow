@@ -28,11 +28,12 @@ const monthLabel = document.querySelector('#month-label');
 const exportSummary = document.querySelector('#export-summary');
 const colorInputs = document.querySelectorAll('[data-shift-color]');
 const hexInputs = document.querySelectorAll('[data-hex-input]');
-const COLOR_DEFAULTS = { day: '#E4A836', night: '#3D629B', mid: '#D16B4E', rest: '#A2ABB2' };
+const COLOR_DEFAULTS = { day: '#E4A836', night: '#3D629B', mid: '#D16B4E', rest: '#A2ABB2', today: '#1F8578' };
 const COLOR_STORAGE_KEY = 'shiftflow-shift-colors';
 let shiftOverrides = readShiftOverrides();
 let selectedDateKey = null;
-let displayMonth = new Date(2026, 7, 1);
+const currentDate = new Date();
+let displayMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
 
 function parseDate(value) {
   const [year, month, day] = value.split('-').map(Number);
